@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>[hidden]{display:none!important} body{margin:0} img{max-width:100%}</style>
+<title>NOAL ONE</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="NOAL ONE — Retoa / BIGSEA によるHIPHOPクルーの公式サイト">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: 蛍光灯の地下道のようなヒーローに手書きロゴ。コンクリート地のNEWS、2人並びのARTISTS、品番付きトラックリスト */
+:root {
+  --ink: #0c0c0b;          /* 夜の黒 */
+  --ink-2: #171715;        /* 一段明るい黒 */
+  --wall: #2b2a27;         /* 影になったコンクリート */
+  --concrete: #d8d6d0;     /* 光が当たったコンクリート */
+  --paper: #edece8;        /* 白（チョーク） */
+  --ash: #8d8b85;          /* 補助テキスト */
+  --line: #2c2b28;         /* 黒地の罫線 */
+  --line-light: #b9b6ae;   /* コンクリート地の罫線 */
+  --signal: #b8281f;       /* 差し色：赤（キャップ・ジャケットの赤） */
+  --tube: #f4f6ee;         /* 蛍光灯 */
+  --f-display: "Anton", "Impact", "Arial Narrow Bold", sans-serif;
+  --f-body: "IBM Plex Sans JP", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gut-l: max(16px, env(safe-area-inset-left, 0px));
+  --gut-r: max(16px, env(safe-area-inset-right, 0px));
+  --wrap: 1200px;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --stain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .1  0 0 0 0 .1  0 0 0 0 .09  0 0 0 1.4 -.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink);
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.inner {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-left: var(--gut-l);
+  padding-right: var(--gut-r);
+}
+.label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.logo-svg { display: block; width: 100%; height: auto; color: inherit; }
+
+/* ---------- header ---------- */
+.site-header {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--ink) 88%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .inner {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-block: 8px;
+}
+.logo { display: block; width: 74px; text-decoration: none; }
+.nav { display: flex; gap: clamp(14px, 3vw, 32px); }
+.nav a { text-decoration: none; color: var(--ash); transition: color .15s; }
+.nav a:hover { color: var(--paper); }
+
+/* ---------- hero：蛍光灯の地下道 ---------- */
+.hero { position: relative; overflow: hidden; background: var(--wall); isolation: isolate; }
+.hero-bg, .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-bg { z-index: -1; }
+.hero-bg img { object-fit: cover; }
+/* 写真がないときの地下道の絵：トンネルの奥行き＋蛍光灯＋周辺減光 */
+.hero-bg::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 34% 9% at 50% 7%, rgba(244,246,238,.55), transparent 70%),
+    radial-gradient(ellipse 60% 55% at 50% 42%, rgba(160,156,146,.22), transparent 70%),
+    linear-gradient(180deg, #3a3833 0%, #24231f 46%, #121210 100%);
+}
+.hero-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 75% 70% at 50% 45%, transparent 45%, rgba(0,0,0,.82) 100%),
+    var(--stain), var(--grain);
+  mix-blend-mode: multiply;
+}
+.hero-bg:has(img)::before { display: none; }
+.tube {
+  position: absolute; left: 50%; top: 5%; transform: translateX(-50%);
+  width: clamp(120px, 22vw, 260px); height: 7px; border-radius: 2px;
+  background: var(--tube);
+  box-shadow: 0 0 18px 4px rgba(244,246,238,.45), 0 0 80px 24px rgba(244,246,238,.18);
+  animation: flicker 7s steps(1) infinite;
+}
+.hero-bg:has(img) .tube { display: none; }
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  61% { opacity: .35; } 62% { opacity: 1; } 64% { opacity: .5; } 65% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .tube { animation: none; } }
+
+.hero .inner {
+  position: relative;
+  padding-block: clamp(96px, 16vw, 180px) clamp(28px, 4vw, 44px);
+  display: grid; gap: clamp(40px, 8vw, 96px);
+}
+.hero-logo {
+  width: min(86%, 660px);
+  margin-inline: auto;
+  color: var(--paper);
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,.35));
+}
+.hero-logo h1 { margin: 0; }
+.hero-foot {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 24px;
+  color: rgba(237,236,232,.72);
+}
+.hero-foot p { margin: 0; max-width: 30em; font-size: 14px; }
+.hero-foot .label b { color: var(--paper); font-weight: 500; }
+
+/* ---------- 写真枠（あとで <img> を入れる） ---------- */
+.photo {
+  position: relative; margin: 0; overflow: hidden;
+  background: var(--wall);
+  max-width: 100%;
+  isolation: isolate;
+}
+.photo::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 40%, rgba(150,146,136,.25), transparent 70%),
+    var(--stain), var(--grain);
+}
+.photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 75% at 50% 45%, transparent 55%, rgba(0,0,0,.6) 100%);
+}
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.photo .ph {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  color: rgba(237,236,232,.4); text-align: center; padding: 16px;
+}
+.photo figcaption { position: absolute; left: 12px; bottom: 10px; z-index: 1; color: rgba(237,236,232,.6); }
+
+/* ---------- section heads ---------- */
+.sec { padding-block: clamp(56px, 9vw, 112px); }
+.sec-head {
+  display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
+.sec-title {
+  font-family: var(--f-display); font-weight: 400;
+  font-size: clamp(52px, 9vw, 112px); line-height: .9; margin: 0; letter-spacing: .005em;
+  text-transform: uppercase;
+}
+.sec-note { color: var(--ash); }
+
+/* ---------- news：光が当たったコンクリート壁 ---------- */
+.news {
+  position: relative; color: var(--ink);
+  background:
+    radial-gradient(ellipse 70% 90% at 15% 0%, rgba(255,255,255,.35), transparent 60%),
+    linear-gradient(180deg, transparent 70%, rgba(60,56,48,.12)),
+    var(--grain), var(--concrete);
+  background-blend-mode: normal, multiply, multiply, normal;
+}
+.news .sec-note { color: #5f5d57; }
+.news-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.news-item a {
+  display: grid;
+  grid-template-columns: 112px 92px minmax(0, 1fr) 24px;
+  gap: 16px; align-items: baseline;
+  padding-block: 20px; text-decoration: none;
+  border-bottom: 1px solid var(--line-light);
+  transition: padding .2s;
+}
+.news-item a:hover { padding-left: 10px; }
+.news-item a:hover .arrow { color: var(--signal); }
+.news-date { font-family: var(--f-mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+.tag {
+  justify-self: start;
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  border: 1px solid currentColor; padding: 1px 7px; line-height: 1.7;
+}
+.tag-live { background: var(--signal); border-color: var(--signal); color: var(--paper); }
+.news-title { font-weight: 500; min-width: 0; }
+.arrow { font-family: var(--f-mono); text-align: right; }
+
+/* ---------- artists ---------- */
+.artists-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+}
+.artist { display: grid; gap: 18px; align-content: start; min-width: 0; }
+.artist .photo { aspect-ratio: 2 / 3; }
+.artist-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.artist-name {
+  font-family: var(--f-display); font-weight: 400; text-transform: uppercase;
+  font-size: clamp(48px, 7vw, 92px); line-height: .9; margin: 0;
+  overflow-wrap: anywhere;
+}
+.artist-no { color: var(--ash); text-align: right; }
+.artist-bio { margin: 0; max-width: 36em; }
+.facts { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; font-size: 13px; }
+.facts dt { color: var(--ash); font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; padding-top: 2px; }
+.facts dd { margin: 0; }
+.sns { display: flex; flex-wrap: wrap; gap: 8px; }
+.sns a {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  text-decoration: none; border: 1px solid var(--line); padding: 6px 12px;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.sns a:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+/* ---------- crew photo ---------- */
+.wide-photo .photo { aspect-ratio: 4 / 3; max-width: 960px; margin-inline: auto; }
+@media (min-width: 861px) { .wide-photo .photo { aspect-ratio: 16 / 10; } }
+
+/* ---------- music ---------- */
+.filter { display: flex; border: 1px solid var(--line); }
+.filter button {
+  font: inherit; font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  background: transparent; color: var(--ash); border: 0; padding: 8px 14px; cursor: pointer;
+}
+.filter button + button { border-left: 1px solid var(--line); }
+.filter button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+.tracks { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--paper); }
+.track-cat { font-family: var(--f-mono); font-size: 12px; color: var(--ash); }
+.track-title { font-weight: 700; font-size: 17px; line-height: 1.4; min-width: 0; }
+.track-title small { display: block; font-weight: 400; font-size: 12px; color: var(--ash); }
+.track-by { font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.track-time { font-family: var(--f-mono); font-size: 12px; color: var(--ash); font-variant-numeric: tabular-nums; text-align: right; }
+.track-links { display: flex; gap: 6px; justify-content: flex-end; }
+.track-links a {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; border: 1px solid var(--line); padding: 4px 8px; white-space: nowrap;
+}
+.track-links a:hover { border-color: var(--paper); }
+
+/* ---------- footer ---------- */
+.site-footer { border-top: 1px solid var(--line); }
+.site-footer .inner {
+  padding-block: 40px 48px;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px;
+}
+.footer-logo { width: 150px; color: var(--paper); }
+.footer-meta { color: var(--ash); display: grid; gap: 4px; text-align: right; }
+
+/* ---------- artist（押せる写真） ---------- */
+.artist-open { display: block; text-decoration: none; position: relative; }
+.artist-open .photo img { transition: transform .5s cubic-bezier(.2,.7,.2,1), filter .3s; }
+.artist-open:hover .photo img { transform: scale(1.03); filter: brightness(1.08); }
+.open-chip {
+  position: absolute; right: 12px; bottom: 12px; z-index: 2;
+  background: var(--paper); color: var(--ink); padding: 6px 10px;
+  transition: background .15s, color .15s;
+}
+.artist-open:hover .open-chip { background: var(--signal); color: var(--paper); }
+.sns a.sns-primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.sns a.sns-primary:hover { background: var(--signal); border-color: var(--signal); color: var(--paper); }
+
+/* ---------- track rows（共通） ---------- */
+.tracks .track { display: block; padding: 0; }
+.track a {
+  display: grid; grid-template-columns: 48px minmax(0, 1fr) 110px auto;
+  gap: 16px; align-items: center; padding-block: 16px; text-decoration: none;
+  transition: padding .2s, color .2s;
+}
+.track a:hover { padding-left: 10px; }
+.track a:hover .track-play { color: var(--paper); border-color: var(--paper); }
+.track-no { font-family: var(--f-mono); font-size: 12px; color: var(--ash); font-variant-numeric: tabular-nums; }
+.track-title { font-weight: 700; font-size: 17px; line-height: 1.4; min-width: 0; overflow-wrap: anywhere; }
+.track-play {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ash); border: 1px solid var(--line); padding: 5px 9px; white-space: nowrap; justify-self: end;
+}
+.panel-tracks .track a { grid-template-columns: 48px minmax(0, 1fr) auto; }
+.music-note { color: var(--ash); margin: 20px 0 0; }
+
+/* ---------- artist panel ---------- */
+html.panel-open { overflow: hidden; }
+.panel { position: fixed; inset: 0; z-index: 20; }
+.panel-scrim { position: absolute; inset: 0; background: rgba(0,0,0,.6); opacity: 0; transition: opacity .3s; }
+.panel-body {
+  position: absolute; inset: 0 0 0 auto; width: min(1080px, 100%);
+  background: var(--ink); border-left: 1px solid var(--line);
+  overflow-y: auto; overscroll-behavior: contain;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 64px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 48px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px), 4vw);
+  padding-right: max(16px, env(safe-area-inset-right, 0px), 4vw);
+  transform: translateX(40px); opacity: 0;
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), opacity .25s;
+}
+.panel.is-in .panel-scrim { opacity: 1; }
+.panel.is-in .panel-body { transform: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .panel-body, .panel-scrim { transition: none; } }
+.panel-close {
+  position: absolute; top: calc(env(safe-area-inset-top, 0px) + 16px);
+  right: max(16px, env(safe-area-inset-right, 0px), 4vw);
+  background: transparent; color: var(--paper); border: 1px solid var(--line);
+  padding: 8px 12px; cursor: pointer;
+}
+.panel-close:hover { background: var(--paper); color: var(--ink); }
+.panel-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.panel-photo { aspect-ratio: 2 / 3; position: sticky; top: 0; }
+.panel-main { min-width: 0; display: grid; gap: 20px; }
+.panel-kicker { color: var(--ash); margin: 0; }
+.panel-name {
+  font-family: var(--f-display); font-weight: 400; text-transform: uppercase;
+  font-size: clamp(64px, 10vw, 128px); line-height: .88; margin: 0; overflow-wrap: anywhere;
+}
+.panel-list-head {
+  display: flex; justify-content: space-between; color: var(--ash);
+  margin-top: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--paper);
+}
+.panel-tracks { border-top: 0; }
+.panel-next { justify-self: start; text-decoration: none; color: var(--ash); padding-top: 8px; }
+.panel-next:hover { color: var(--paper); }
+.footer-meta a { text-decoration: none; color: var(--paper); }
+
+@media (max-width: 760px) {
+  .panel-grid { grid-template-columns: 1fr; }
+  .panel-photo { position: relative; aspect-ratio: 4 / 3; }
+  .track a { grid-template-columns: 36px minmax(0, 1fr) auto; }
+  .track a .track-by { grid-column: 2; grid-row: 2; margin-top: -10px; }
+  .track-play { grid-column: 3; grid-row: 1; }
+}
+
+/* =========================================================
+   MOTION LAYER（参考：Smile / CyberAgent）
+   ========================================================= */
+
+/* --- floating pill header --- */
+.site-header {
+  position: fixed; left: 0; right: 0; top: 0; z-index: 30;
+  background: transparent; border: 0; backdrop-filter: none;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 12px);
+  padding-left: var(--gut-l); padding-right: var(--gut-r);
+  transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.site-header.is-hidden { transform: translateY(-120%); }
+.site-header .inner {
+  max-width: var(--wrap); padding: 6px 8px 6px 22px;
+  border-radius: 999px; border: 1px solid rgba(237,236,232,.14);
+  background: color-mix(in srgb, var(--ink) 72%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.logo { width: 64px; }
+.nav { align-items: center; }
+.nav a { position: relative; padding-block: 6px; }
+.nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .3s;
+}
+.nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+.menu-btn {
+  display: inline-grid; place-items: center; gap: 5px; width: 44px; height: 44px;
+  border-radius: 50%; border: 0; background: var(--paper); color: var(--ink); cursor: pointer;
+}
+.menu-btn { position: relative; }
+.menu-btn span { position: absolute; left: 14px; width: 16px; height: 1.5px; background: currentColor; transition: transform .3s; }
+.menu-btn span:first-child { top: 18px; }
+.menu-btn span:last-child { top: 24px; }
+.menu-btn[aria-expanded="true"] span:first-child { transform: translateY(3px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] span:last-child { transform: translateY(-3px) rotate(-45deg); }
+.menu-btn-wrap { display: grid; grid-auto-flow: column; gap: 0; }
+
+/* --- fullscreen menu --- */
+.menu {
+  position: fixed; inset: 0; z-index: 25; background: var(--ink);
+  padding-top: calc(env(safe-area-inset-top, 0px) + 110px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 32px);
+  padding-left: var(--gut-l); padding-right: var(--gut-r);
+  clip-path: circle(0% at calc(100% - 40px) 40px);
+  transition: clip-path .6s cubic-bezier(.7,0,.2,1);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.menu.is-open { clip-path: circle(150% at calc(100% - 40px) 40px); }
+.menu ol { list-style: none; margin: 0 auto; padding: 0; width: 100%; max-width: var(--wrap); }
+.menu li { overflow: hidden; border-bottom: 1px solid var(--line); }
+.menu li a {
+  display: flex; justify-content: space-between; align-items: baseline; text-decoration: none;
+  font-family: var(--f-display); text-transform: uppercase; font-size: clamp(56px, 12vw, 132px); line-height: 1.05;
+  transform: translateY(105%); transition: transform .6s cubic-bezier(.2,.7,.2,1), color .2s;
+}
+.menu li a small { font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; color: var(--ash); }
+.menu li a:hover { color: var(--signal); }
+.menu.is-open li a { transform: none; }
+.menu.is-open li:nth-child(2) a { transition-delay: .06s; }
+.menu.is-open li:nth-child(3) a { transition-delay: .12s; }
+.menu.is-open li:nth-child(4) a { transition-delay: .18s; }
+.menu-foot { max-width: var(--wrap); width: 100%; margin: 0 auto; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--ash); }
+.menu-foot a { color: var(--paper); text-decoration: none; }
+
+/* --- loader（0% → 100%、ロゴが書かれていく） --- */
+.loader { display: none; }
+html.is-loading .loader {
+  display: grid; position: fixed; inset: 0; z-index: 100; background: var(--ink);
+  place-items: center; align-content: center; gap: 28px;
+}
+html.is-loading body { overflow: hidden; }
+.loader-logo { width: min(56vw, 320px); color: var(--paper); clip-path: inset(0 100% 0 0); animation: write 1.1s .1s cubic-bezier(.6,0,.3,1) forwards; }
+@keyframes write { to { clip-path: inset(0 0 0 0); } }
+.loader-count { font-family: var(--f-mono); font-size: 12px; letter-spacing: .2em; color: var(--ash); font-variant-numeric: tabular-nums; }
+.loader.is-out { animation: loaderOut .7s cubic-bezier(.7,0,.2,1) forwards; }
+@keyframes loaderOut { to { clip-path: inset(0 0 100% 0); } }
+
+/* ヒーロー：ローダー明けに蛍光灯が点く */
+html.lights-off .tube { opacity: 0; animation: none; }
+html.lights-on .tube { animation: switchOn .9s steps(1) forwards, flicker 7s 1s steps(1) infinite; }
+@keyframes switchOn { 0%{opacity:0} 15%{opacity:1} 25%{opacity:.2} 40%{opacity:1} 55%{opacity:.4} 70%,100%{opacity:1} }
+.hero-logo, .tube, .hero-foot { will-change: transform; }
+
+/* --- scroll-velocity marquee（全曲タイトル） --- */
+.marquee {
+  overflow: hidden; border-block: 1px solid var(--line); background: var(--ink);
+  padding-block: 14px; white-space: nowrap; position: relative; z-index: 1;
+}
+.marquee-track { display: inline-flex; will-change: transform; }
+.marquee-item {
+  font-family: var(--f-display); text-transform: uppercase; font-size: clamp(34px, 6vw, 72px); line-height: 1;
+  padding-right: .5em; color: transparent; -webkit-text-stroke: 1px rgba(237,236,232,.55);
+  text-decoration: none; transition: color .2s;
+}
+.marquee-item:nth-child(4n+1) { color: var(--paper); -webkit-text-stroke: 0; }
+.marquee-item:hover { color: var(--signal); -webkit-text-stroke: 0; }
+.marquee-item::after { content: "✶"; font-size: .4em; vertical-align: middle; margin-left: .5em; color: var(--signal); -webkit-text-stroke: 0; }
+
+/* --- section title：文字が下からせり上がる --- */
+.sec-title .ch { display: inline-block; transition: transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i) * 40ms); }
+.sec-title { overflow: hidden; padding-bottom: .04em; }
+.pre .sec-title .ch, .sec-title.pre .ch { transform: translateY(110%); }
+
+/* --- reveal（画面外にあるものだけJSで隠してから出す） --- */
+[data-reveal] { transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1), clip-path 1.1s cubic-bezier(.7,0,.2,1); }
+[data-reveal].pre { opacity: 0; transform: translateY(40px); }
+[data-reveal="wipe"].pre { opacity: 1; transform: none; clip-path: inset(100% 0 0 0); }
+[data-reveal="wipe"] { clip-path: inset(0 0 0 0); }
+
+/* --- tags をピル型に（CyberAgent風） --- */
+.tag { border-radius: 999px; padding: 2px 10px; }
+.news-item a { position: relative; }
+.news-item a::before {
+  content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%;
+  background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.news-item a:hover::before { transform: scaleX(1); }
+
+/* --- artist cards --- */
+.artist-open .photo { border-radius: 4px; }
+.artist-open .photo img { transition: transform .9s cubic-bezier(.2,.7,.2,1), filter .3s; transform: scale(1.06); }
+.artist-open:hover .photo img { transform: scale(1.0); filter: brightness(1.1) contrast(1.05); }
+.artist-name { display: inline-block; transition: transform .45s cubic-bezier(.2,.7,.2,1), color .2s; }
+.artist:hover .artist-name { transform: translateX(10px); }
+.wide-photo .photo img { transform: translateY(var(--py, 0px)) scale(1.18); will-change: transform; }
+
+/* --- music rows：白が左から流れ込む --- */
+.track a { position: relative; isolation: isolate; }
+.track a::before {
+  content: ""; position: absolute; inset: 0 calc(-1 * var(--gut-r)) 0 calc(-1 * var(--gut-l)); z-index: -1;
+  background: var(--paper); transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.panel .track a::before { inset: 0 -12px; }
+.track a:hover { color: var(--ink); padding-left: 14px; }
+.track a:hover .track-no, .track a:hover .track-by { color: var(--ink); }
+.track a:hover::before { transform: scaleX(1); }
+.track a:hover .track-play { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+.track-no { position: relative; }
+.track a:hover .track-no { color: transparent; }
+.track a:hover .track-no::after { content: "▶"; position: absolute; left: 0; color: var(--signal); }
+.panel.is-in .panel-tracks .track { animation: rowIn .6s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(.15s + var(--i, 0) * 45ms); }
+@keyframes rowIn { from { opacity: 0; transform: translateX(30px); } }
+.panel.is-in .panel-name { animation: rowIn .7s .05s cubic-bezier(.2,.7,.2,1) both; }
+
+/* --- custom cursor（マウス操作のときだけ） --- */
+.cursor { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .cursor {
+    display: grid; place-items: center; position: fixed; left: 0; top: 0; z-index: 90; pointer-events: none;
+    width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%;
+    background: var(--paper); mix-blend-mode: difference; color: #000;
+    font-family: var(--f-mono); font-size: 0; letter-spacing: .12em; text-transform: uppercase;
+    transition: width .3s cubic-bezier(.2,.7,.2,1), height .3s cubic-bezier(.2,.7,.2,1), margin .3s cubic-bezier(.2,.7,.2,1), font-size .2s;
+  }
+  .cursor.is-big { width: 92px; height: 92px; margin: -46px 0 0 -46px; font-size: 11px; mix-blend-mode: normal; background: var(--signal); color: var(--paper); }
+  .cursor.is-link { width: 40px; height: 40px; margin: -20px 0 0 -20px; }
+}
+
+/* --- back to top（スクロール進捗リング） --- */
+.to-top {
+  position: fixed; z-index: 15;
+  right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  width: 56px; height: 56px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--ink); color: var(--paper); display: grid; place-items: center;
+  opacity: 0; transform: translateY(20px) scale(.8); pointer-events: none;
+  transition: opacity .3s, transform .3s;
+}
+.to-top.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.to-top svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.to-top circle { fill: none; stroke-width: 2; }
+.to-top .ring-bg { stroke: var(--line); }
+.to-top .ring { stroke: var(--paper); stroke-dasharray: 163.4; stroke-dashoffset: calc(163.4 * (1 - var(--p, 0))); }
+.to-top span { font-family: var(--f-mono); font-size: 16px; }
+.to-top:hover { background: var(--signal); }
+
+@media (max-width: 760px) { .nav a { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html.is-loading .loader { display: none; }
+  html.is-loading body { overflow: auto; }
+  .menu, .menu li a, [data-reveal], .sec-title .ch { transition: none !important; }
+  [data-reveal].pre { opacity: 1; transform: none; clip-path: none; }
+  .pre .sec-title .ch, .sec-title.pre .ch { transform: none; }
+  .panel-tracks .track, .panel-name { animation: none !important; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px) {
+}
+@media (max-width: 700px) {
+  .artists-grid { grid-template-columns: 1fr; gap: 56px; }
+  .news-item a { grid-template-columns: 1fr auto; gap: 6px 12px; }
+  .news-date { grid-column: 1; grid-row: 1; }
+  .tag { grid-column: 2; grid-row: 1; justify-self: end; }
+  .news-title { grid-column: 1 / -1; }
+  .arrow { display: none; }
+  .nav { gap: 14px; }
+  .hero-foot { flex-direction: column; align-items: start; }
+}
+</style>
+</head>
+<body>
+
+
+<!-- 手書きロゴ（このsymbolを各所で使い回し） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="noal-logo" viewBox="0 0 1455 1107"><path fill="currentColor" fill-rule="evenodd" d="M250 1088C255 1085 261 1082 263 1080C264 1079 267 1077 268 1076C269 1076 273 1074 276 1071C278 1068 282 1065 284 1065C288 1063 291 1060 293 1055C294 1051 300 1047 304 1045C308 1043 311 1040 313 1036C313 1035 321 1026 331 1016C340 1006 348 997 349 996C349 995 353 990 357 986C361 982 364 977 364 976C365 975 367 972 368 970C370 968 372 965 373 963C374 962 375 959 377 958C378 957 380 954 381 952C381 950 383 947 385 946C386 944 388 941 389 939C390 938 391 935 393 933C395 932 396 930 396 928C396 927 399 920 402 913C405 907 408 901 408 899C408 898 410 894 412 889C414 885 416 881 416 879C416 878 417 876 418 874C419 871 420 869 420 868C420 867 421 864 422 862C423 859 424 856 424 854C425 851 426 848 428 846C431 844 432 841 432 838C433 835 434 834 436 832C438 832 440 830 440 828C441 826 442 825 444 824C447 823 448 822 448 819C449 812 459 796 463 791C466 788 468 786 468 784C468 776 479 761 489 756C492 754 492 754 492 748C492 742 492 741 487 737C485 734 481 732 479 731C476 729 474 728 473 725C471 720 464 713 460 712C459 711 457 710 456 708C456 706 454 704 452 703C450 703 446 700 443 697L438 692L432 692C422 693 421 698 430 701C434 701 437 703 442 709C446 713 451 716 452 717C455 718 465 727 467 731C468 733 470 735 471 736C474 737 474 740 470 743C469 745 468 746 468 750C468 753 467 757 464 763C462 767 460 772 460 774C459 776 458 780 456 781C452 786 440 810 440 814C440 822 437 825 432 823C430 822 429 821 429 818C428 814 427 812 421 807C414 799 411 798 407 803C403 807 403 810 409 813C416 817 418 826 414 834C413 837 412 840 412 842C412 845 411 848 410 850C409 853 408 856 408 858C408 861 407 864 406 866C405 869 404 871 404 872C404 873 403 876 402 878C401 881 400 884 400 886C399 889 397 892 395 894C394 896 392 899 392 900C392 903 382 924 379 926C378 927 375 932 373 936C371 940 369 945 367 946C365 948 364 951 363 952C363 953 360 957 357 960C355 963 352 967 352 968C351 969 349 972 348 974C346 976 344 979 343 980C343 981 339 987 333 992C328 997 324 1003 324 1004C322 1008 269 1061 264 1063C262 1064 260 1066 258 1067C256 1070 235 1080 232 1080C231 1080 229 1081 226 1082C217 1087 204 1082 193 1070C184 1062 184 1061 184 1046C184 1035 184 1033 186 1030C187 1027 188 1024 188 1021C188 1019 189 1016 190 1014C191 1011 192 1009 192 1007C192 1006 194 1002 196 997C198 993 200 989 200 987C200 986 204 978 208 969C212 960 216 952 216 951C216 949 222 936 225 934C227 931 232 923 232 918C233 916 234 912 236 910C238 909 242 902 245 895C248 889 252 883 253 882C254 880 256 878 257 876C257 874 259 871 261 870C262 868 265 864 267 859C269 855 272 851 273 850C274 849 277 844 279 840C281 835 285 830 287 828C289 825 293 820 295 816C297 811 301 806 303 804C305 801 309 796 310 792C313 787 315 785 316 784C320 783 331 772 333 768C333 766 339 760 345 754C351 747 356 741 357 740C358 737 371 722 375 721C377 720 381 717 384 714C388 711 391 709 394 708C396 708 401 706 405 704C410 702 414 700 415 700C420 700 422 695 419 690C418 687 416 687 411 690C408 691 405 692 403 692C397 692 390 696 384 701C382 704 376 707 373 709C368 711 365 714 364 716C363 717 361 719 360 720C356 721 345 732 343 736C343 738 337 744 331 750C325 757 320 763 319 764C319 765 316 770 312 774C307 779 304 783 301 789C298 796 296 797 293 799C291 800 288 802 287 805C286 807 284 810 283 811C281 812 280 815 280 818C279 821 278 822 276 824C273 825 271 828 267 837C262 847 260 850 253 857C246 863 244 866 244 868C244 871 234 892 231 894C230 895 227 900 225 904C223 909 220 914 219 915C217 916 216 918 216 920C216 921 211 933 204 947C197 960 192 972 192 973C192 974 189 980 186 987C182 995 180 1000 180 1003C180 1005 179 1008 178 1010C177 1013 176 1016 176 1018C176 1021 175 1024 174 1026C173 1029 172 1032 172 1034C172 1037 171 1040 170 1042C169 1045 168 1047 168 1048C168 1049 169 1051 170 1054C171 1056 172 1058 172 1059C172 1067 184 1081 197 1087L206 1092L224 1092L242 1092L250 1088ZM499 1027C499 1026 501 1023 503 1019C505 1016 507 1013 508 1012C510 1012 512 1009 513 1007C514 1005 516 1003 517 1002C518 1001 521 996 523 992C525 987 529 982 531 980C533 977 536 974 537 972C537 970 539 967 541 966C542 964 544 961 545 959C546 958 547 955 549 954C550 953 552 950 553 948C553 946 555 943 557 942C559 940 560 937 561 936C561 935 564 931 567 928C569 925 572 921 572 920C573 919 575 916 576 914C578 912 580 909 581 907C582 906 583 903 585 902C586 901 588 898 588 897C589 895 589 895 594 896C600 896 603 893 604 886C605 883 606 882 608 880C610 880 612 878 612 876C614 874 615 873 618 872C621 872 624 871 626 868C628 867 631 865 632 864C633 864 637 861 640 859C643 856 647 853 648 853C652 851 656 847 656 845C656 841 654 840 650 840C646 840 645 841 639 847C635 851 630 854 629 855C627 856 624 858 622 859C617 864 609 865 609 861C609 858 614 848 617 846C618 844 620 842 621 840C621 838 623 835 625 834C627 832 628 829 628 826C629 823 630 822 632 820C634 819 637 816 639 811C641 808 644 802 647 800C650 797 654 790 659 778L668 761L668 750C668 738 667 736 664 736C662 736 660 735 658 734C655 733 652 732 650 732C648 732 645 733 642 734C640 735 637 736 636 736C633 736 629 740 628 744C627 747 624 748 618 748C611 748 601 755 600 760C599 761 597 763 592 765C587 768 583 771 578 775C575 778 571 782 568 783C564 785 545 804 544 808C543 809 541 811 540 812C536 813 533 817 532 820C531 821 529 823 528 824C525 825 523 828 521 833C519 837 516 842 515 843C513 844 512 846 512 848C512 849 511 852 510 854C505 863 509 872 517 872C524 872 525 869 522 862C518 855 520 849 527 845C531 843 532 841 537 832C540 824 543 821 544 820C546 820 550 816 554 813C557 809 562 805 564 805C566 804 568 802 568 800C569 798 571 797 572 796C573 796 579 792 584 787C589 781 595 777 596 777C600 775 603 772 605 767C607 764 608 763 613 760C617 758 621 757 623 756C626 756 627 755 628 752C629 750 630 749 634 748C637 748 640 747 642 744C647 740 649 740 652 745C654 749 654 750 653 753C653 754 652 756 652 757C652 760 633 796 631 798C630 799 627 804 625 808C623 813 620 817 619 818C618 819 615 824 613 828C611 833 608 837 607 838C606 839 603 844 601 848C599 852 596 858 593 860C590 863 588 867 587 869C586 870 585 873 583 874C582 875 579 880 577 884C575 888 573 893 571 894C569 896 568 899 567 900C567 901 564 905 561 908C559 911 556 915 556 916C555 917 553 920 552 922C550 924 548 927 547 928C547 929 544 933 541 936C539 939 536 943 536 944C535 945 533 948 532 950C530 952 528 955 527 956C527 957 524 962 520 966C515 971 512 975 509 981C507 985 504 989 503 990C502 992 500 994 499 996C499 998 497 1001 495 1002C494 1004 492 1007 491 1009C490 1010 489 1013 487 1015C483 1018 483 1022 487 1025C490 1028 497 1029 499 1027ZM681 1013C685 1010 685 1007 682 1004C677 1001 679 995 689 985C694 981 696 978 696 976C696 973 698 969 701 966C703 964 704 962 704 960C705 959 707 957 708 956C711 955 712 953 712 950C713 947 714 944 718 940C721 937 724 934 724 932C725 931 727 929 728 928C731 927 733 924 737 915C740 909 744 902 745 901C747 900 748 898 748 896C748 893 750 889 753 886C754 884 756 881 757 879C758 878 759 875 761 873C763 872 764 870 764 868C764 865 766 861 769 858C772 855 776 846 776 843C776 842 777 840 778 838C780 835 780 832 780 826L780 818L773 811C769 806 766 804 764 804C763 804 760 803 757 802C752 799 734 799 733 802C731 805 733 807 739 808C742 808 746 809 747 810C749 811 751 812 752 812C756 812 767 818 767 820C769 827 767 835 763 839C761 840 760 842 760 844C760 847 746 876 743 878C742 879 739 884 737 888C735 893 731 898 729 901C726 904 724 906 724 908C724 912 722 915 717 920C714 923 712 927 711 929C710 930 708 934 705 936C703 939 700 944 697 948C695 952 692 958 689 960C686 963 684 967 683 968C683 969 681 973 678 976C673 981 660 1004 660 1008C660 1010 661 1012 663 1013C665 1016 666 1016 672 1016C678 1016 679 1016 681 1013ZM902 970C904 969 907 968 912 968C916 968 919 967 922 966C924 965 927 964 932 964C936 964 939 963 942 962C944 960 947 960 954 960C960 960 963 960 966 958C968 957 970 956 972 956C973 956 975 955 977 954C978 953 982 952 987 952C995 951 998 950 995 946C994 943 980 943 975 946C971 947 968 948 962 948C956 948 953 948 950 950C948 952 945 952 938 952C932 952 929 952 926 954C924 956 921 956 914 956C908 956 905 956 902 958C900 959 897 960 892 960C888 960 885 961 882 962C879 964 877 964 864 964C851 964 849 964 846 962C843 961 840 960 836 960C828 960 817 955 811 948C804 942 803 939 806 934C807 931 808 928 808 926C809 923 811 920 814 916C817 913 820 909 820 908C821 907 823 904 824 902C826 900 828 897 829 896C830 893 843 879 847 877C850 876 852 873 853 871C855 868 856 866 859 865C862 864 868 858 876 851C883 844 890 838 891 837C893 836 897 833 900 830C904 827 907 825 910 824C916 823 922 820 929 813C934 808 939 805 947 801C956 796 959 795 960 792C961 789 964 788 970 788C972 788 980 785 989 780C1002 774 1006 772 1009 772C1012 772 1015 771 1018 770C1024 767 1037 767 1045 771C1053 775 1061 782 1063 787C1064 791 1064 797 1063 801C1061 805 1043 822 1040 823C1039 824 1036 825 1034 827C1031 830 1019 836 1017 836C1016 836 1008 840 999 844C990 848 982 852 981 852C979 852 975 854 971 856C965 859 961 860 959 860C956 860 953 861 950 862C948 864 945 864 938 864C932 864 929 864 926 866C923 868 921 868 912 868C904 868 902 868 898 870C896 871 893 872 890 872C885 872 884 873 884 880C884 889 888 890 894 885C896 882 899 881 902 880C904 880 907 879 909 878C912 877 912 877 915 878C919 880 921 880 926 878C928 877 930 876 932 876C933 876 935 875 938 874C940 873 943 872 948 872C952 872 955 871 958 870C960 869 963 868 967 868C972 868 975 867 981 864C986 862 991 860 992 860C994 860 996 859 997 857C1000 855 1013 848 1016 848C1018 848 1027 843 1030 841C1031 839 1034 837 1036 837C1038 836 1040 834 1042 833C1044 830 1049 828 1052 828C1054 828 1058 825 1065 818C1079 803 1083 796 1078 786C1077 784 1076 781 1076 780C1076 775 1062 764 1055 764C1054 764 1052 763 1050 762C1046 760 1044 760 1032 760C1020 760 1018 760 1014 762C1012 763 1009 764 1006 764C1004 764 1001 765 998 766C996 767 994 768 993 768C991 768 986 770 980 773C975 776 968 779 966 779C963 780 961 781 960 784C959 786 958 787 955 787C948 789 925 800 920 806C917 809 913 811 912 811C911 812 908 813 906 815C905 817 902 819 900 819C898 820 896 822 894 823C893 824 889 827 885 829C878 832 875 835 866 844C859 850 853 855 852 855C848 856 809 896 807 900C807 902 805 905 803 906C800 909 796 918 796 921C796 922 795 924 794 926C792 929 792 932 792 939C792 946 792 947 795 949C796 950 798 953 799 955C801 959 809 964 812 964C814 964 816 965 818 966C821 967 823 968 824 968C826 968 828 969 830 970C836 973 896 973 902 970ZM1243 594C1244 592 1244 592 1243 590C1242 589 1240 588 1227 588C1214 588 1211 587 1209 586C1207 585 1204 584 1200 584C1195 584 1192 583 1190 582C1187 581 1185 580 1184 580C1182 580 1180 579 1178 578C1175 577 1173 576 1172 576C1171 576 1168 575 1166 574C1163 573 1160 572 1158 572C1154 571 1152 569 1146 564C1142 560 1137 556 1135 555C1131 554 1122 543 1121 540C1120 539 1119 536 1117 534C1114 531 1108 519 1108 516C1108 515 1107 513 1106 510C1105 508 1104 505 1104 502C1104 500 1103 497 1102 494C1100 491 1100 489 1100 462C1100 435 1100 433 1102 429C1103 427 1104 425 1104 423C1104 422 1105 420 1106 417C1107 415 1108 413 1108 412C1108 410 1109 408 1110 406C1111 403 1112 401 1112 399C1112 398 1113 396 1114 393C1115 391 1116 389 1116 388C1116 385 1126 364 1129 362C1130 360 1132 358 1132 356C1134 354 1135 353 1138 353C1141 352 1144 351 1148 347C1153 342 1156 340 1160 340C1162 340 1164 339 1165 337C1166 336 1171 333 1176 331C1180 329 1185 326 1186 325C1187 324 1191 321 1196 319C1200 317 1205 314 1206 313C1207 311 1210 310 1211 309C1213 308 1216 306 1218 305C1219 303 1222 301 1224 301C1226 300 1228 298 1230 297C1231 296 1235 293 1239 291C1246 288 1249 285 1258 277C1268 267 1269 264 1267 261C1264 259 1261 260 1257 265C1254 268 1250 270 1249 271C1247 272 1244 274 1242 275C1241 277 1238 279 1236 279C1234 280 1231 283 1228 285C1226 288 1221 291 1213 295C1205 299 1199 303 1196 305C1194 308 1188 311 1184 313C1180 315 1175 318 1174 319C1173 320 1169 323 1165 325C1161 327 1155 330 1154 332C1150 335 1146 336 1145 333C1145 331 1149 321 1153 318C1154 316 1156 313 1157 311C1158 310 1159 307 1161 306C1162 305 1164 302 1165 300C1165 298 1167 295 1169 294C1170 292 1172 289 1173 287C1174 286 1175 283 1177 282C1178 281 1180 278 1181 276C1181 274 1183 271 1185 270C1187 268 1188 265 1189 264C1189 263 1193 258 1197 254C1201 250 1204 245 1205 244C1205 243 1209 238 1213 234C1217 230 1220 225 1221 224C1221 223 1225 218 1229 214C1233 210 1236 205 1237 204C1237 203 1241 197 1247 192C1252 187 1256 181 1257 180C1257 179 1265 170 1275 160C1284 150 1292 141 1293 140C1293 137 1326 103 1331 101C1333 100 1336 98 1336 96C1337 94 1339 93 1340 92C1343 92 1348 87 1348 84C1349 83 1350 81 1352 81C1354 80 1356 78 1356 76C1357 74 1359 73 1360 72C1361 72 1368 66 1376 59C1395 39 1405 36 1414 45C1419 49 1424 61 1424 68C1424 72 1425 75 1426 78C1428 81 1428 83 1428 92L1428 103L1421 118C1414 130 1412 133 1407 138C1404 142 1400 146 1399 149C1398 152 1396 154 1393 155C1388 157 1381 164 1379 168C1378 171 1365 186 1361 187C1359 188 1354 192 1350 196C1346 199 1341 203 1340 203C1339 204 1334 207 1330 211C1326 215 1321 219 1320 219C1319 220 1316 222 1314 224C1312 225 1309 227 1308 228C1307 228 1302 231 1298 235C1294 239 1289 243 1288 243C1287 244 1284 246 1282 247C1280 249 1277 251 1275 252C1270 255 1272 260 1279 260C1282 260 1283 259 1285 257C1287 255 1290 254 1291 253C1293 252 1296 250 1298 249C1299 247 1302 245 1304 245C1306 244 1309 242 1310 241C1311 239 1314 238 1315 237C1317 236 1321 233 1324 230C1327 228 1331 225 1332 225C1333 224 1338 221 1342 217C1346 213 1351 209 1352 209C1353 208 1361 202 1368 195C1375 187 1383 181 1384 180C1387 179 1389 176 1391 171C1395 164 1396 163 1399 161C1404 159 1423 140 1425 135C1426 134 1428 130 1431 127C1436 123 1436 122 1436 118C1436 115 1437 112 1438 109C1441 104 1441 85 1438 78L1436 74L1438 70C1441 64 1441 62 1435 57C1433 55 1430 51 1429 48C1426 43 1421 38 1410 33C1398 26 1395 26 1389 33C1386 36 1382 38 1381 39C1379 40 1372 45 1366 52C1360 58 1353 63 1352 63C1348 65 1345 68 1343 73C1342 76 1340 78 1337 79C1332 81 1285 128 1283 132C1283 133 1274 143 1263 154C1253 165 1244 175 1243 176C1243 177 1237 185 1229 192C1222 199 1216 207 1215 208C1215 209 1211 214 1207 218C1203 222 1200 227 1199 228C1199 229 1195 234 1191 238C1187 242 1184 247 1183 248C1183 249 1180 253 1177 256C1175 259 1172 263 1172 264C1171 265 1169 268 1168 270C1166 272 1164 275 1163 276C1163 277 1160 281 1158 284C1155 287 1152 291 1151 293C1150 294 1149 297 1147 298C1146 299 1144 302 1143 304C1143 306 1141 309 1139 310C1138 311 1134 318 1131 325C1127 333 1124 338 1121 341C1118 344 1116 346 1116 348C1116 353 1113 357 1109 359C1106 360 1104 362 1102 363C1101 364 1095 368 1089 371C1082 374 1075 378 1074 379C1073 381 1068 383 1064 385C1060 387 1055 390 1054 392C1052 394 1048 395 1046 396C1040 397 1033 401 1028 405C1026 408 1019 412 1005 419C994 425 983 430 982 431C981 433 976 435 972 437C968 439 963 442 962 443C961 445 958 446 957 447C955 448 952 450 950 452C948 453 945 455 944 456C943 456 940 457 938 459C937 461 934 463 932 463C930 464 928 466 926 467C925 468 917 473 909 477C900 481 891 486 890 487C887 491 867 500 864 500C863 500 860 501 858 503C856 505 853 507 850 507C845 509 843 511 845 514C845 515 847 516 854 516C862 516 862 516 865 513C867 512 875 507 884 503C892 498 901 494 902 493C905 490 917 484 920 484C922 484 924 483 925 481C927 479 930 478 931 477C933 476 936 474 938 473C939 471 942 469 944 469C946 468 948 466 950 465C951 464 955 461 960 459C964 457 969 454 970 453C971 452 975 449 979 447C984 445 989 441 992 438C996 435 999 433 1002 432C1007 432 1023 424 1026 421C1027 419 1030 417 1032 417C1034 416 1036 414 1038 413C1039 412 1045 408 1051 405C1058 402 1065 398 1066 397C1067 395 1072 393 1076 391C1080 389 1085 386 1086 385C1088 382 1100 377 1101 377C1104 378 1103 380 1100 388C1097 392 1096 396 1096 398C1096 401 1095 404 1094 406C1093 409 1092 411 1092 412C1092 414 1091 416 1090 418C1088 422 1088 424 1088 432C1088 441 1088 443 1086 446C1084 450 1084 452 1084 466C1084 480 1084 482 1086 486C1087 488 1088 491 1088 496C1088 500 1089 503 1090 506C1091 508 1092 510 1092 511C1092 513 1093 515 1094 517C1095 520 1096 522 1096 523C1096 526 1100 534 1104 538C1105 540 1107 543 1108 544C1109 549 1124 563 1132 567C1136 569 1141 571 1142 573C1145 576 1162 584 1165 584C1166 584 1168 585 1170 586C1173 587 1176 588 1178 588C1181 588 1184 589 1186 590C1189 591 1192 592 1196 592C1200 592 1204 593 1206 594C1211 597 1242 596 1243 594ZM231 539C234 536 236 534 236 532C236 531 238 526 240 521C242 517 244 512 244 510C245 508 246 504 248 502C250 501 254 494 257 487C260 481 264 475 265 474C266 472 268 470 269 468C269 466 272 462 275 460C278 457 280 453 281 451C282 450 283 447 285 446C286 445 289 440 291 436C293 432 296 426 299 424C302 421 304 417 305 416C305 415 308 411 311 408C313 405 316 401 317 400C317 399 321 393 327 388C332 383 336 377 337 376C337 375 342 368 348 362C355 356 360 349 361 347C362 346 369 338 377 330C386 321 392 314 393 311C394 308 396 307 399 305C401 304 404 302 405 299C406 297 420 282 437 266C454 249 468 234 468 232C469 231 471 229 472 228C476 227 479 224 481 219C482 216 484 214 487 213C492 211 499 204 500 200C501 199 503 197 504 196C506 196 519 183 534 169C548 155 561 142 563 141C565 140 568 138 568 136C569 134 571 133 572 132C573 132 580 127 586 121C592 114 599 109 600 109C601 108 606 105 610 101C613 97 618 93 620 93C622 92 627 87 632 83C636 79 641 74 643 73C645 72 648 70 648 68C649 67 652 65 656 63C660 61 663 58 664 56C665 55 667 53 668 52C670 52 672 51 674 49C675 47 678 45 680 45C682 44 685 41 688 39C692 35 704 28 708 28C709 28 710 27 711 27C712 25 712 15 711 13C707 10 696 14 688 22C685 25 681 27 680 27C679 28 673 32 668 37C663 43 657 47 656 47C655 48 652 50 650 52C648 53 645 55 644 56C643 56 636 61 630 67C624 74 617 79 616 79C615 80 609 84 604 89C599 95 593 99 592 99C591 100 585 104 580 109C576 114 570 119 568 119C566 120 559 126 552 133C546 140 539 146 537 147C535 148 532 151 531 153C529 157 507 178 504 179C500 181 497 184 495 189C494 192 492 193 489 195C486 196 484 198 483 201C481 204 480 206 477 207C472 209 469 212 467 217C465 220 464 222 461 223C455 225 425 256 423 261C421 264 420 266 417 267C412 269 409 272 408 276C407 277 398 287 387 298C377 309 368 319 367 320C367 321 361 329 353 336C346 343 340 351 339 352C339 353 335 358 331 362C327 366 324 371 323 372C323 373 319 379 313 384C308 389 304 395 304 396C303 397 301 400 300 402C298 404 296 407 295 408C295 409 291 414 287 418C283 422 280 427 280 428C279 429 277 432 276 434C274 436 272 439 271 441C270 442 269 445 267 446C266 447 264 450 263 452C263 454 261 457 259 458C258 460 256 463 255 465C254 466 252 470 249 473C246 475 244 478 244 480C244 483 242 487 239 490C238 491 236 495 234 498C233 501 231 504 230 504C229 504 228 497 228 490C228 488 227 485 226 482C224 479 224 477 224 448C224 420 224 418 222 414C220 411 220 409 220 370C220 331 220 329 222 325C224 322 224 320 224 305C224 291 224 289 226 285C227 283 228 280 228 275C228 271 229 268 230 265C232 262 232 260 232 251C232 243 232 241 234 237C236 234 236 232 236 210C236 185 236 182 241 178C243 176 244 173 245 172C245 171 247 167 250 164C257 157 260 151 260 144C260 137 259 136 254 136C249 136 249 136 243 150C237 161 229 170 224 171C220 173 216 177 216 180C216 184 198 220 193 224C191 227 187 232 185 236C183 240 180 246 177 248C174 251 172 255 171 257C170 258 169 261 167 262C166 263 164 266 163 268C163 270 161 273 159 274C157 276 156 279 155 280C155 281 152 286 148 290C143 295 140 299 137 305C135 309 132 313 131 314C130 316 128 318 127 320C127 322 125 325 123 326C121 328 120 331 119 332C119 333 116 337 114 340C111 343 108 347 107 349C106 350 105 353 103 354C102 355 99 360 97 364C95 369 92 373 91 374C90 376 88 378 87 380C87 382 85 385 83 386C82 388 80 391 79 393C78 394 77 397 75 398C74 399 72 402 71 404C71 406 69 409 67 410C66 411 62 418 59 425C56 431 52 438 51 439C49 440 48 442 48 444C48 447 46 451 43 454C40 457 36 466 36 469C36 470 32 480 26 491C17 509 16 511 16 517C16 525 19 528 28 528C34 528 35 528 39 524C41 521 45 516 47 511C49 507 52 502 53 501C58 497 56 492 51 492C49 492 45 496 44 500C42 505 33 512 33 508C33 506 71 431 73 430C74 429 77 424 79 420C81 415 84 411 85 410C86 409 89 404 91 400C93 395 96 391 97 390C98 388 100 386 101 384C101 382 103 379 105 378C106 376 108 373 109 371C110 370 111 367 113 366C114 365 116 362 117 360C117 358 119 355 121 354C122 352 124 349 125 347C126 346 127 343 129 342C130 341 133 336 135 332C137 328 140 322 143 320C146 317 148 313 149 311C150 310 152 306 155 304C157 301 160 296 163 292C165 288 168 282 171 280C174 277 176 273 177 272C177 271 180 267 182 264C185 261 188 257 189 255C190 254 191 251 193 250C194 249 196 246 197 244C197 242 199 239 201 238C202 236 204 233 205 231C206 230 207 227 209 226C210 225 212 222 213 220C214 216 219 211 221 211C224 211 225 217 222 222C221 226 220 229 220 235C220 241 220 244 218 246C216 250 216 252 216 262C216 273 216 275 214 278C212 282 212 284 212 292C212 301 212 303 210 306C208 310 208 312 208 330C208 349 208 351 206 354C205 357 204 359 204 360C204 361 205 363 206 365C208 369 208 371 208 409C208 448 208 450 210 454C212 457 212 459 212 485C212 505 212 514 213 516C214 518 214 519 213 520C212 523 212 525 214 530C215 532 216 535 216 536C216 539 221 544 224 544C226 544 228 542 231 539ZM722 498C724 497 726 496 728 496C729 496 731 495 734 494C736 493 739 492 740 492C742 492 744 491 745 489C746 488 755 483 763 479C772 475 781 470 782 468C784 467 787 465 788 464C789 464 792 462 794 460C798 457 801 456 804 458C807 461 812 460 812 456C812 455 813 451 815 448C818 442 818 441 824 439C828 437 833 433 836 430C839 428 843 425 844 425C845 424 848 422 850 420C852 419 855 417 856 416C857 416 861 413 864 411C867 408 871 405 872 405C873 404 876 402 878 400C880 399 883 397 884 396C885 396 889 393 892 391C895 388 899 385 900 385C904 383 947 340 949 336C949 334 951 331 953 330C956 326 960 318 960 314C960 304 951 296 940 296C934 296 933 296 931 299C929 301 926 302 925 303C923 304 920 306 918 308C916 309 913 311 912 311C911 312 905 317 898 323C892 329 886 335 884 335C882 336 873 344 862 355C853 365 843 374 841 375C839 376 836 379 835 381C834 383 830 387 827 390C824 394 820 398 819 400C819 402 817 405 815 406C813 409 804 426 804 428C804 432 798 444 793 448C790 452 785 455 777 459C770 462 763 466 762 467C759 470 731 484 729 484C727 484 725 485 722 486C720 488 717 488 710 488C698 488 696 487 692 478C687 469 687 460 690 454C691 451 692 449 692 448C692 445 706 416 709 414C710 413 713 408 715 404C717 400 719 395 721 394C723 392 724 389 725 388C725 387 728 383 731 380C733 377 736 373 736 372C737 371 739 368 740 366C742 364 744 361 744 360C745 359 746 357 748 356C750 356 752 354 753 352C753 350 756 346 759 344C762 341 764 337 764 336C765 335 766 333 768 332C770 332 772 329 773 327C775 323 781 318 784 316C785 316 793 309 802 301C811 292 819 285 820 285C821 284 825 282 828 279C830 276 836 273 840 271C844 269 849 266 850 265C851 263 854 262 855 261C857 260 861 258 864 255C868 250 880 244 884 244C885 244 889 242 893 240C903 235 912 235 919 238C923 240 925 240 930 238C934 236 940 235 944 237C948 238 951 245 949 249C948 252 948 261 949 263C952 266 960 261 960 256C960 255 961 252 962 249C965 244 964 242 961 237C959 233 958 233 954 231C951 231 948 230 948 229C947 229 945 228 944 228C943 228 940 227 938 226C933 224 931 224 926 226C923 228 921 228 906 228L889 228L887 231C884 234 879 236 872 236C865 236 858 239 850 247C846 252 841 255 836 257C832 259 827 262 826 263C825 265 822 266 821 267C819 268 813 272 808 278C803 283 797 287 796 287C792 289 749 332 747 336C747 338 743 343 739 346C735 350 732 355 731 356C731 357 727 362 724 366C720 370 716 375 715 377C714 378 713 381 711 382C710 383 707 388 705 392C703 396 701 401 699 402C697 405 680 438 680 441C680 442 679 444 678 446C676 450 676 452 676 467L676 483L680 487C685 491 693 496 696 496C698 496 700 497 702 498C707 501 716 501 722 498ZM526 494C528 493 531 492 533 492C540 492 554 484 562 477C566 473 570 469 572 469C574 468 576 465 577 463C578 460 580 458 583 457C588 455 599 444 601 439C602 436 604 434 607 433C612 431 619 424 621 420C621 419 625 414 629 410C633 406 636 401 637 400C637 399 643 391 651 384C658 377 664 369 664 368C665 367 666 364 668 363C670 361 676 350 682 338L692 317L692 307C692 299 692 297 694 293C696 291 696 288 696 282L696 274L691 268C688 265 685 261 684 259C683 257 681 256 678 256C675 255 674 254 673 252C671 247 665 242 658 239C652 235 652 235 646 238C644 239 641 240 640 240C638 240 635 243 627 251C621 257 615 262 612 263C608 265 573 300 571 304C571 305 567 310 563 314C559 318 556 323 556 324C555 325 553 328 552 330C550 332 548 335 547 337C546 338 543 343 539 346C533 353 529 360 528 366C527 369 525 372 523 374C522 376 520 379 520 380C520 383 518 388 515 391C513 392 512 394 512 396C512 397 510 402 508 407C506 411 504 415 504 417C504 418 503 420 502 422C501 425 500 427 500 428C500 430 499 432 498 434C497 437 496 440 496 444C496 449 495 452 494 454C493 457 492 460 492 466C492 472 493 475 494 478C495 480 496 483 496 484C496 488 501 492 506 492C508 492 512 493 514 494C519 496 521 496 526 494ZM514 483C512 481 510 480 507 474L504 466L506 462C507 458 508 455 508 449C508 442 508 441 514 429C517 423 520 417 520 415C520 414 522 410 524 405C526 401 528 397 528 395C528 393 542 364 545 362C546 361 549 356 551 352C553 347 556 343 557 342C558 341 561 336 563 332C567 324 568 322 594 296C609 281 623 269 624 268C625 268 631 264 636 258C647 248 650 247 657 249C660 250 661 252 664 258C669 267 669 267 677 271C684 275 685 277 682 283C680 286 680 289 680 297C680 306 680 307 676 315C674 319 672 324 672 326C671 329 669 332 667 334C666 336 664 339 664 340C664 343 662 348 659 350C658 352 656 354 655 356C655 358 653 361 651 362C649 364 648 367 647 368C647 369 644 373 641 376C639 379 636 383 636 384C635 387 552 470 549 471C547 472 544 474 542 475C535 482 522 486 514 483ZM821 424C821 421 828 411 835 404C839 399 844 394 845 392C847 387 876 358 880 357C881 356 889 350 896 343C903 335 911 329 912 328C913 328 917 325 920 323C923 320 927 317 928 317C929 316 932 314 934 312C936 311 939 309 940 309C942 309 946 312 946 314C946 316 941 324 939 326C938 328 936 330 935 332C934 335 931 338 929 340C927 343 924 346 923 349C922 352 920 354 917 355C914 356 909 361 904 365C899 370 894 374 893 375C891 376 887 379 884 382C881 384 877 387 876 387C875 388 871 391 868 393C865 396 861 399 860 399C859 400 855 403 852 405C849 408 845 411 844 411C843 412 839 414 836 417C830 423 821 427 821 424Z"/></symbol>
+</svg>
+
+<script>
+  // 初回だけローディング演出（2回目以降・動きを減らす設定ではスキップ）
+  (function () {
+    var seen = false;
+    try { seen = sessionStorage.getItem("noal-loaded") === "1"; } catch (e) {}
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!seen && !reduce) document.documentElement.classList.add("is-loading", "lights-off");
+  })();
+</script>
+<div class="loader" id="loader" aria-hidden="true">
+  <svg class="loader-logo logo-svg" viewBox="0 0 1455 1107"><use href="#noal-logo"/></svg>
+  <span class="loader-count" id="loader-count">000%</span>
+</div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="#top" aria-label="NOAL ONE トップへ"><svg class="logo-svg" viewBox="0 0 1455 1107" aria-hidden="true"><use href="#noal-logo"/></svg></a>
+    <nav class="nav label" aria-label="メインメニュー">
+      <a href="#news">News</a>
+      <a href="#artists">Artists</a>
+      <a href="#music">Music</a>
+      <a href="https://www.instagram.com/noalone0619/" target="_blank" rel="noopener">IG ↗</a>
+      <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="メニューを開く"><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+<nav class="menu" id="menu" aria-label="メニュー" hidden>
+  <ol>
+    <li><a href="#news" data-menu-link>News <small>01</small></a></li>
+    <li><a href="#artists" data-menu-link>Artists <small>02</small></a></li>
+    <li><a href="#music" data-menu-link>Music <small>03</small></a></li>
+    <li><a href="https://www.instagram.com/noalone0619/" target="_blank" rel="noopener">Instagram ↗ <small>@noalone0619</small></a></li>
+  </ol>
+  <div class="menu-foot label"><span>Retoa / BIGSEA</span><span>© 2026 Noal One</span></div>
+</nav>
+<button type="button" class="to-top" id="to-top" aria-label="ページの先頭へ">
+  <svg viewBox="0 0 56 56" aria-hidden="true"><circle class="ring-bg" cx="28" cy="28" r="26"/><circle class="ring" cx="28" cy="28" r="26"/></svg>
+  <span aria-hidden="true">↑</span>
+</button>
+
+
+<main id="top">
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-bg">
+      <!-- 写真を入れるときはここに <img src="images/xxxx.jpg" alt=""> を1行足す（入れると蛍光灯の絵は自動で消える） -->
+      <span class="tube" aria-hidden="true"></span>
+    </div>
+    <div class="inner">
+      <div class="hero-logo">
+        <h1><span class="sr-only">NOAL ONE</span><svg class="logo-svg" viewBox="0 0 1455 1107" aria-hidden="true"><use href="#noal-logo"/></svg></h1>
+      </div>
+      <div class="hero-foot">
+        <p>RetoaとBIGSEAによるHIPHOPクルー。<br><span style="color:var(--ash)">※ここにクルーの紹介文が入ります</span></p>
+        <span class="label"><b>Retoa</b> / <b>BIGSEA</b> — <a href="https://www.instagram.com/noalone0619/" target="_blank" rel="noopener">Instagram @noalone0619 ↗</a></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 全曲タイトルが流れる帯（曲データから自動生成） -->
+  <div class="marquee" aria-label="曲タイトル"><div class="marquee-track" id="marquee-track"></div></div>
+
+  <!-- ===== NEWS ===== -->
+  <section class="news sec" id="news">
+    <div class="inner">
+      <div class="sec-head">
+        <h2 class="sec-title">News</h2>
+        <span class="label sec-note">サンプル表示中</span>
+      </div>
+      <!-- お知らせを増やすときは <li class="news-item">…</li> をコピーして上に足す（新しい順） -->
+      <ul class="news-list" data-reveal>
+        <li class="news-item"><a href="#">
+          <span class="news-date">2026.11.02</span>
+          <span class="tag">Info</span>
+          <span class="news-title">NOAL ONE オフィシャルサイトを公開しました</span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li class="news-item"><a href="#">
+          <span class="news-date">2026.10.00</span>
+          <span class="tag">Release</span>
+          <span class="news-title">（サンプル）Retoa 新曲「曲タイトル」配信スタート</span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li class="news-item"><a href="#">
+          <span class="news-date">2026.10.00</span>
+          <span class="tag tag-live">Live</span>
+          <span class="news-title">（サンプル）○月○日 イベント名 @ 会場名 に出演します</span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li class="news-item"><a href="#">
+          <span class="news-date">2026.09.00</span>
+          <span class="tag">Release</span>
+          <span class="news-title">（サンプル）BIGSEA 新曲「曲タイトル」MV公開</span>
+          <span class="arrow">→</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== ARTISTS ===== -->
+  <section class="sec" id="artists">
+    <div class="inner">
+      <div class="sec-head">
+        <h2 class="sec-title">Artists</h2>
+        <span class="label sec-note">写真を押すと曲の一覧が開きます</span>
+      </div>
+      <div class="artists-grid">
+        <article class="artist" data-reveal>
+          <a class="artist-open" data-cursor="Open" href="#retoa" data-open="retoa" aria-label="Retoa の曲一覧を開く">
+            <figure class="photo">
+              <img src="images/retoa.jpg" alt="Retoa" style="object-position:56% 50%" loading="lazy">
+              <span class="open-chip label"><span data-count="retoa">2</span> Tracks ↗</span>
+            </figure>
+          </a>
+          <div class="artist-head">
+            <h3 class="artist-name">Retoa</h3>
+            <span class="artist-no label">No.01<br>Rapper</span>
+          </div>
+          <p class="artist-bio">ここにRetoaのプロフィール文が入ります。活動を始めたきっかけ、影響を受けたアーティスト、スタイルなどを2〜4行で。</p>
+          <div class="sns">
+            <a href="https://www.instagram.com/retoa_noalone/" target="_blank" rel="noopener">Instagram ↗</a>
+            <a href="https://on.soundcloud.com/86oOzDwFhb3HrdgGEe" target="_blank" rel="noopener">SoundCloud ↗</a>
+            <a class="sns-primary" href="#retoa" data-open="retoa">曲一覧を見る</a>
+          </div>
+        </article>
+
+        <article class="artist" data-reveal>
+          <a class="artist-open" data-cursor="Open" href="#bigsea" data-open="bigsea" aria-label="BIGSEA の曲一覧を開く">
+            <figure class="photo">
+              <img src="images/bigsea.jpg" alt="BIGSEA" style="object-position:50% 50%" loading="lazy">
+              <span class="open-chip label"><span data-count="bigsea">12</span> Tracks ↗</span>
+            </figure>
+          </a>
+          <div class="artist-head">
+            <h3 class="artist-name">BIGSEA</h3>
+            <span class="artist-no label">No.02<br>Rapper</span>
+          </div>
+          <p class="artist-bio">ここにBIGSEAのプロフィール文が入ります。活動を始めたきっかけ、影響を受けたアーティスト、スタイルなどを2〜4行で。</p>
+          <div class="sns">
+            <a href="https://www.instagram.com/bigsea119/" target="_blank" rel="noopener">Instagram ↗</a>
+            <a href="https://on.soundcloud.com/Yc5IX35AM84e2DsDIM" target="_blank" rel="noopener">SoundCloud ↗</a>
+            <a class="sns-primary" href="#bigsea" data-open="bigsea">曲一覧を見る</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CREW PHOTO ===== -->
+  <section class="wide-photo">
+    <div class="inner">
+      <figure class="photo" data-reveal="wipe">
+        <img src="images/crew.jpg" alt="Retoa と BIGSEA" style="object-position:50% 58%" loading="lazy">
+        <figcaption class="label">Noal One — Retoa / BIGSEA</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== MUSIC（全曲。中身はページ下部の ARTISTS データから自動で作られる） ===== -->
+  <section class="sec" id="music">
+    <div class="inner">
+      <div class="sec-head">
+        <h2 class="sec-title">Music</h2>
+        <div class="filter" role="group" aria-label="アーティストで絞り込み">
+          <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+          <button type="button" id="f-retoa" data-f="retoa" aria-pressed="false">Retoa</button>
+          <button type="button" id="f-bigsea" data-f="bigsea" aria-pressed="false">BIGSEA</button>
+        </div>
+      </div>
+      <ol class="tracks" id="all-tracks" data-reveal></ol>
+      <p class="music-note label">All tracks on SoundCloud</p>
+    </div>
+  </section>
+</main>
+
+<!-- ===== アーティストの曲一覧（写真を押すと開くパネル） ===== -->
+<div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-name" hidden>
+  <div class="panel-scrim" data-close></div>
+  <div class="panel-body">
+    <button type="button" class="panel-close label" id="panel-close" data-close>Close ×</button>
+    <div class="panel-grid">
+      <figure class="photo panel-photo"><img id="panel-img" src="images/retoa.jpg" alt=""></figure>
+      <div class="panel-main">
+        <p class="label panel-kicker" id="panel-kicker">Noal One / No.01</p>
+        <h2 class="panel-name" id="panel-name">Retoa</h2>
+        <div class="sns" id="panel-links"></div>
+        <div class="panel-list-head label"><span>Tracks</span><span id="panel-count"></span></div>
+        <ol class="tracks panel-tracks" id="panel-tracks"></ol>
+        <a class="panel-next label" id="panel-next" href="#bigsea">Next artist →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div class="footer-logo"><svg class="logo-svg" viewBox="0 0 1455 1107" aria-hidden="true"><use href="#noal-logo"/></svg></div>
+    <div class="footer-meta label">
+      <a href="https://www.instagram.com/noalone0619/" target="_blank" rel="noopener">Instagram @noalone0619 ↗</a>
+      <span>Retoa / BIGSEA</span>
+      <span>© 2026 Noal One</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* =========================================================
+     曲データ：曲を増やすときはここに1行足すだけ
+     { title: "曲名", url: "SoundCloudのリンク" }
+     ========================================================= */
+  var ARTISTS = {
+    retoa: {
+      name: "Retoa", no: "No.01", img: "images/retoa.jpg", pos: "56% 50%",
+      instagram: "https://www.instagram.com/retoa_noalone/", ig: "@retoa_noalone",
+      soundcloud: "https://on.soundcloud.com/86oOzDwFhb3HrdgGEe",
+      tracks: [
+        { title: "妄想ningen", url: "https://on.soundcloud.com/xL6VZZxxzYVhnEpOwD" },
+        { title: "2nd LIFE", url: "https://on.soundcloud.com/fdFwCGLEwN8IJLpS43" }
+      ]
+    },
+    bigsea: {
+      name: "BIGSEA", no: "No.02", img: "images/bigsea.jpg", pos: "50% 50%",
+      instagram: "https://www.instagram.com/bigsea119/", ig: "@bigsea119",
+      soundcloud: "https://on.soundcloud.com/Yc5IX35AM84e2DsDIM",
+      tracks: [
+        { title: "KITAKO", url: "https://on.soundcloud.com/dYkvzP0BqqdlW1WTRc" },
+        { title: "Cruisin`", url: "https://on.soundcloud.com/CQmzqzsanTY8pQR4ps" },
+        { title: "patsy", url: "https://on.soundcloud.com/dUPvugAuT9n21lo0zE" },
+        { title: "The process", url: "https://on.soundcloud.com/Oas918UfcjTPAh8FzQ" },
+        { title: "value of money", url: "https://on.soundcloud.com/ojeRZ8kstSkCQOmlSC" },
+        { title: "Solitude", url: "https://on.soundcloud.com/kizVCrc4Qa8XFNRyK5" },
+        { title: "Smile", url: "https://on.soundcloud.com/utSn0ULVkFhzRf15yK" },
+        { title: "Still Going", url: "https://on.soundcloud.com/IOzUZ3EkCWNg1R8Zv5" },
+        { title: "LIKE A FLAME", url: "https://on.soundcloud.com/uqCdfX1SHhls95Owq9" },
+        { title: "OLD FRIEND", url: "https://on.soundcloud.com/mE0fiV2LZdc0TeXZq1" },
+        { title: "D1Y", url: "https://on.soundcloud.com/v0eQvA28CZwYnFCmgq" },
+        { title: "24/7", url: "https://on.soundcloud.com/TGudnTAYbnWY7rQNCj" }
+      ]
+    }
+  };
+  var ORDER = ["retoa", "bigsea"];
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function trackRow(t, i, key, showArtist) {
+    var li = document.createElement("li");
+    li.className = "track";
+    li.setAttribute("data-artist", key);
+    var a = document.createElement("a");
+    a.href = t.url; a.target = "_blank"; a.rel = "noopener";
+    a.innerHTML =
+      '<span class="track-no">' + pad(i + 1) + '</span>' +
+      '<span class="track-title"></span>' +
+      (showArtist ? '<span class="track-by">' + ARTISTS[key].name + '</span>' : '') +
+      '<span class="track-play">Play on SoundCloud <span aria-hidden="true">↗</span></span>';
+    a.querySelector(".track-title").textContent = t.title;
+    li.appendChild(a);
+    return li;
+  }
+
+  // MUSIC（全曲）
+  (function () {
+    var list = document.getElementById("all-tracks");
+    ORDER.forEach(function (key) {
+      ARTISTS[key].tracks.forEach(function (t, i) { list.appendChild(trackRow(t, i, key, true)); });
+      var c = document.querySelector('[data-count="' + key + '"]');
+      if (c) c.textContent = ARTISTS[key].tracks.length;
+    });
+    var btns = document.querySelectorAll(".filter button");
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var f = b.getAttribute("data-f");
+        btns.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        list.querySelectorAll(".track").forEach(function (t) {
+          t.hidden = !(f === "all" || t.getAttribute("data-artist") === f);
+        });
+      });
+    });
+  })();
+
+  // アーティストパネル（#retoa / #bigsea で開く）
+  (function () {
+    var panel = document.getElementById("panel");
+    var lastFocus = null;
+    function render(key) {
+      var a = ARTISTS[key];
+      var img = document.getElementById("panel-img");
+      img.src = a.img; img.alt = a.name; img.style.objectPosition = a.pos;
+      document.getElementById("panel-kicker").textContent = "Noal One / " + a.no;
+      document.getElementById("panel-name").textContent = a.name;
+      document.getElementById("panel-count").textContent = a.tracks.length + " Tracks";
+      var links = document.getElementById("panel-links");
+      links.innerHTML = "";
+      [["Instagram " + a.ig, a.instagram], ["SoundCloud", a.soundcloud]].forEach(function (l) {
+        var el = document.createElement("a");
+        el.href = l[1]; el.target = "_blank"; el.rel = "noopener"; el.textContent = l[0] + " ↗";
+        links.appendChild(el);
+      });
+      var list = document.getElementById("panel-tracks");
+      list.innerHTML = "";
+      a.tracks.forEach(function (t, i) { list.appendChild(trackRow(t, i, key, false)); });
+      var nextKey = ORDER[(ORDER.indexOf(key) + 1) % ORDER.length];
+      var next = document.getElementById("panel-next");
+      next.href = "#" + nextKey; next.textContent = "Next — " + ARTISTS[nextKey].name + " →";
+    }
+    function open(key) {
+      if (!ARTISTS[key]) return close();
+      if (panel.hidden) lastFocus = document.activeElement;
+      render(key);
+      panel.hidden = false;
+      document.documentElement.classList.add("panel-open");
+      panel.querySelector(".panel-body").scrollTop = 0;
+      requestAnimationFrame(function () { panel.classList.add("is-in"); });
+      document.getElementById("panel-close").focus({ preventScroll: true });
+    }
+    function close() {
+      if (panel.hidden) return;
+      panel.classList.remove("is-in");
+      document.documentElement.classList.remove("panel-open");
+      panel.hidden = true;
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    }
+    function fromHash() { open(location.hash.slice(1)); }
+    document.addEventListener("click", function (e) {
+      var o = e.target.closest("[data-open]");
+      if (o) { e.preventDefault(); var k = o.getAttribute("data-open"); if (location.hash !== "#" + k) location.hash = k; else open(k); return; }
+      if (e.target.closest("[data-close]")) {
+        e.preventDefault();
+        if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+        close();
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !panel.hidden) {
+        if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+        close();
+      }
+    });
+    window.addEventListener("hashchange", fromHash);
+    if (ARTISTS[location.hash.slice(1)]) fromHash();
+  })();
+
+  /* =========================================================
+     MOTION
+     ========================================================= */
+  (function () {
+    var root = document.documentElement;
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // --- loader ---
+    var loader = document.getElementById("loader");
+    function lightsOn() { root.classList.remove("lights-off"); root.classList.add("lights-on"); }
+    if (root.classList.contains("is-loading")) {
+      var cnt = document.getElementById("loader-count"), t0 = performance.now(), dur = 1300;
+      (function tick(now) {
+        var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        cnt.textContent = ("00" + Math.round(e * 100)).slice(-3) + "%";
+        if (p < 1) return requestAnimationFrame(tick);
+        loader.classList.add("is-out");
+        setTimeout(function () { root.classList.remove("is-loading"); lightsOn(); try { sessionStorage.setItem("noal-loaded", "1"); } catch (e) {} }, 650);
+      })(t0);
+    }
+
+    // --- section titles を1文字ずつに分割 ---
+    document.querySelectorAll(".sec-title").forEach(function (h) {
+      var txt = h.textContent; h.setAttribute("aria-label", txt); h.textContent = "";
+      txt.split("").forEach(function (c, i) {
+        var s = document.createElement("span"); s.className = "ch"; s.setAttribute("aria-hidden", "true");
+        s.style.setProperty("--i", i); s.textContent = c; h.appendChild(s);
+      });
+      h.setAttribute("data-reveal-title", "");
+    });
+
+    // --- reveal（読み込み時に画面外にあるものだけ） ---
+    var targets = document.querySelectorAll("[data-reveal], [data-reveal-title]");
+    if (!reduce && "IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.remove("pre"); io.unobserve(en.target); } });
+      }, { rootMargin: "0px 0px -12% 0px" });
+      targets.forEach(function (el) {
+        if (el.getBoundingClientRect().top > innerHeight * 0.92) { el.classList.add("pre"); io.observe(el); }
+      });
+    }
+
+    // --- marquee（全曲タイトル。スクロールの速さで加速＆傾く） ---
+    var mq = document.getElementById("marquee-track");
+    if (mq) {
+      var items = [];
+      ORDER.forEach(function (k) { ARTISTS[k].tracks.forEach(function (t) { items.push(t); }); });
+      for (var r = 0; r < 2; r++) items.forEach(function (t) {
+        var a = document.createElement("a"); a.className = "marquee-item"; a.href = t.url; a.target = "_blank"; a.rel = "noopener";
+        a.textContent = t.title; a.setAttribute("data-cursor", "Play"); if (r) a.setAttribute("aria-hidden", "true"), a.tabIndex = -1;
+        mq.appendChild(a);
+      });
+    }
+
+    // --- scroll：ヒーローのパララックス、ヘッダーの出し入れ、進捗リング、写真パララックス ---
+    var header = document.querySelector(".site-header");
+    var logo = document.querySelector(".hero-logo"), tube = document.querySelector(".tube"), foot = document.querySelector(".hero-foot");
+    var toTop = document.getElementById("to-top");
+    var wide = document.querySelector(".wide-photo .photo");
+    var lastY = scrollY, vel = 0, x = 0, half = 0;
+    function frame() {
+      var y = scrollY, dy = y - lastY; lastY = y;
+      vel += (dy - vel) * 0.12;
+      if (!reduce) {
+        if (y < innerHeight * 1.2) {
+          logo.style.transform = "translateY(" + (y * 0.35) + "px) scale(" + (1 - Math.min(y / 2400, .15)) + ")";
+          logo.style.opacity = Math.max(0, 1 - y / (innerHeight * 0.8));
+          tube.style.transform = "translateX(-50%) translateY(" + (y * 0.6) + "px)";
+          foot.style.transform = "translateY(" + (y * 0.12) + "px)";
+        }
+        if (wide) {
+          var r = wide.getBoundingClientRect();
+          if (r.bottom > 0 && r.top < innerHeight) wide.style.setProperty("--py", ((r.top + r.height / 2 - innerHeight / 2) * -0.12).toFixed(1) + "px");
+        }
+        if (mq) {
+          if (!half) half = mq.scrollWidth / 2;
+          x -= 0.6 + Math.abs(vel) * 0.35;
+          if (half && -x >= half) x += half;
+          var skew = Math.max(-12, Math.min(12, vel * -0.4));
+          mq.style.transform = "translate3d(" + x + "px,0,0) skewX(" + skew + "deg)";
+        }
+      }
+      if (!document.getElementById("menu").classList.contains("is-open")) header.classList.toggle("is-hidden", dy > 2 && y > 240);
+      if (dy < -2) header.classList.remove("is-hidden");
+      var max = document.documentElement.scrollHeight - innerHeight;
+      toTop.style.setProperty("--p", max > 0 ? (y / max).toFixed(3) : 0);
+      toTop.classList.toggle("is-on", y > innerHeight * 0.6);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+    addEventListener("resize", function () { half = 0; });
+    toTop.addEventListener("click", function () { scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); });
+
+    // --- menu ---
+    var menu = document.getElementById("menu"), btn = document.getElementById("menu-btn");
+    function setMenu(open) {
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) { menu.hidden = false; requestAnimationFrame(function () { menu.classList.add("is-open"); }); root.classList.add("panel-open"); header.classList.remove("is-hidden"); }
+      else { menu.classList.remove("is-open"); root.classList.remove("panel-open"); setTimeout(function () { if (!menu.classList.contains("is-open")) menu.hidden = true; }, 600); }
+    }
+    btn.addEventListener("click", function () { setMenu(btn.getAttribute("aria-expanded") !== "true"); });
+    menu.querySelectorAll("[data-menu-link]").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+    addEventListener("keydown", function (e) { if (e.key === "Escape" && menu.classList.contains("is-open")) setMenu(false); });
+
+    // --- panel の曲に順番の遅延を付ける ---
+    new MutationObserver(function () {
+      document.querySelectorAll("#panel-tracks .track").forEach(function (li, i) { li.style.setProperty("--i", i); });
+    }).observe(document.getElementById("panel-tracks"), { childList: true });
+
+    // --- custom cursor ---
+    var cur = document.getElementById("cursor");
+    if (matchMedia("(hover: hover) and (pointer: fine)").matches && !reduce) {
+      var cx = -100, cy = -100, tx = -100, ty = -100;
+      addEventListener("mousemove", function (e) {
+        tx = e.clientX; ty = e.clientY;
+        var t = e.target.closest ? e.target.closest("[data-cursor], .track a, a, button") : null;
+        var label = t && (t.getAttribute("data-cursor") || (t.closest(".track") ? "Play" : ""));
+        cur.textContent = label || "";
+        cur.classList.toggle("is-big", !!label);
+        cur.classList.toggle("is-link", !!t && !label);
+      });
+      (function move() { cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2; cur.style.transform = "translate(" + cx + "px," + cy + "px)"; requestAnimationFrame(move); })();
+    }
+  })();
+</script>
+</body>
+</html>
